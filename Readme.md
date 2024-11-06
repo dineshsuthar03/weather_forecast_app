@@ -9,7 +9,7 @@ A modern, responsive Weather Forecast application built with Django and OpenWeat
 
 ![Weather App Screenshot](https://raw.githubusercontent.com/yourusername/weather-forecast-app/main/screenshot.png)
 
-🔗 **Live Demo:** [Weather Forecast App](https://weather-forecast-app-v1.onrender.com)
+🔗 **Live Demo:** [Weather Forecast App](https://weather-forecast-app-nn32.onrender.com/)
 
 ## ✨ Features
 
