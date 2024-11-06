@@ -153,7 +153,7 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 ## 👤 Author
 
 Your Name
-- GitHub: [@yourusername](https://github.com/yourusername)
+- GitHub: [@yourusername](https://github.com/dineshsuthar03)
 - LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
 
 ## 🌟 Acknowledgments
