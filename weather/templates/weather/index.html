@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast App</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="weather-card">
+            <h1>Weather Forecast</h1>
+
+            {% if messages %}
+            <div class="alert-container">
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }}">
+                        {% if message.tags == 'success' %}
+                            <i class="fas fa-check-circle"></i>
+                        {% elif message.tags == 'error' %}
+                            <i class="fas fa-exclamation-circle"></i>
+                        {% elif message.tags == 'warning' %}
+                            <i class="fas fa-exclamation-triangle"></i>
+                        {% elif message.tags == 'info' %}
+                            <i class="fas fa-info-circle"></i>
+                        {% endif %}
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="POST" class="search-form">
+                {% csrf_token %}
+                <div class="search-box">
+                    <input type="text" name="city_name" placeholder="Enter city name" required>
+                    <button type="submit">
+                        <i class="fas fa-search"></i> Get Weather
+                    </button>
+                </div>
+            </form>
+
+            {% if weather_info %}
+            <div class="weather-info">
+                <!-- Rest of the weather info HTML remains the same as in the previous version -->
+                <div class="location-header">
+                    <h2>
+                        <i class="fas fa-map-marker-alt"></i>
+                        {{ weather_info.city_name }}, {{ weather_info.country }}
+                    </h2>
+                </div>
+
+                <div class="main-temp">
+                    <img src="http://openweathermap.org/img/wn/{{ weather_info.icon }}@2x.png" alt="Weather Icon">
+                    <div class="temp-details">
+                        <div class="current-temp">{{ weather_info.temperature }}°C</div>
+                        <div class="weather-desc">{{ weather_info.description | title }}</div>
+                        <div class="feels-like">Feels like: {{ weather_info.feels_like }}°C</div>
+                    </div>
+                </div>
+
+                <div class="weather-grid">
+                    <div class="weather-item">
+                        <i class="fas fa-wind"></i>
+                        <div class="item-details">
+                            <span class="label">Wind Speed</span>
+                            <span class="value">{{ weather_info.wind_speed }} m/s</span>
+                        </div>
+                    </div>
+
+                    <div class="weather-item">
+                        <i class="fas fa-tint"></i>
+                        <div class="item-details">
+                            <span class="label">Humidity</span>
+                            <span class="value">{{ weather_info.humidity }}%</span>
+                        </div>
+                    </div>
+
+                    <div class="weather-item">
+                        <i class="fas fa-cloud"></i>
+                        <div class="item-details">
+                            <span class="label">Cloud Coverage</span>
+                            <span class="value">{{ weather_info.clouds }}%</span>
+                        </div>
+                    </div>
+
+                    <div class="weather-item">
+                        <i class="fas fa-eye"></i>
+                        <div class="item-details">
+                            <span class="label">Visibility</span>
+                            <span class="value">{{ weather_info.visibility }} m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sun-times">
+                    <div class="sun-item">
+                        <i class="fas fa-sunrise"></i>
+                        <div class="item-details">
+                            <span class="label">Sunrise (UTC)</span>
+                            <span class="value">{{ weather_info.sunrise }}</span>
+                        </div>
+                    </div>
+
+                    <div class="sun-item">
+                        <i class="fas fa-sunset"></i>
+                        <div class="item-details">
+                            <span class="label">Sunset (UTC)</span>
+                            <span class="label">Sunset (UTC)</span>
+                            <span class="label">Sunset (UTC)</span>
+                            <span class="value">{{ weather_info.sunset }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="coordinates">
+                    <i class="fas fa-location-dot"></i>
+                    Coordinates: {{ weather_info.coordinates }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
