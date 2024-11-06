@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -132,7 +133,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Directory where collected static files will be stored
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-# This is necessary when you run `python manage.py collectstatic` for production, where static files are collected into a single directory
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # This is only used in production
+# Optional: Additional directories to look for static files (e.g., development)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # This is where you place your app-specific static files in development
+]
